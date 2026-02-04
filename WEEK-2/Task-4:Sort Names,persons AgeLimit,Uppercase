@@ -1,0 +1,38 @@
+import java.util.*;
+import java.util.stream.*;
+class Person{
+	String name;
+	int age;
+	Person(String name , int age){
+		this.name = name;
+		this.age = age; 
+	}
+	String getName() { return name ; }
+	int getAge() { return age ; }
+	 static boolean olderThan(Person p,int limit) {
+		 return p.age > limit;
+	 }
+}
+public class Sorting {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n =sc.nextInt();
+		List<Person>list = new ArrayList<>();
+		for(int i=0;i<n;i++) {
+			list.add(new Person(sc.next(),sc.nextInt()));
+		}
+		int ageLimit = sc.nextInt();
+		list.stream().map(Person::getName).sorted() .forEach(name-> System.out.print(name + " "));
+		System.out.println();
+		list.stream()
+			.filter(p -> Person.olderThan(p, ageLimit))
+			.map(Person::getName)
+			.forEach(name -> System.out.print(name + " "));
+		System.out.println();
+		list.stream()
+			.map(Person::getName)
+			.map(String::toUpperCase)
+			.forEach(name -> System.out.print(name + " "));
+	}
+}
